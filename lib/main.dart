@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'randomPlaceImage.dart';
 import 'dart:math';
 import 'dart:ui';
 
@@ -32,29 +31,16 @@ class GlassMorphism extends StatefulWidget {
 }
 
 class _GlassMorphismState extends State<GlassMorphism> {
-  List<Widget> widgets = <Widget>[];
-
-  List<Widget> imagesArray(var random) {
-    List<Widget> widgets = <Widget>[];
-    for (int loop = 1; loop <= 21; loop++) {
-      widgets.add(
-        AnimatedImage(
-          imageName: 'images/' + loop.toString() + '.jpg',
-          random: random,
-          passedContext: context,
-        ),
-      );
-    }
-    return widgets;
-  }
+  var random;
+  var opacity = 0.0;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((_) => setState(() {
-          var random = Random();
-          widgets = imagesArray(random);
+          opacity = 1.0;
         }));
+    random = Random();
   }
 
   @override
@@ -63,8 +49,105 @@ class _GlassMorphismState extends State<GlassMorphism> {
       child: Scaffold(
         body: Stack(
           children: <Widget>[
-            new Stack(
-              children: widgets,
+            new AnimatedOpacity(
+              duration: Duration(seconds: 3),
+              opacity: opacity,
+              child: new Container(
+                child: AspectRatio(
+                  aspectRatio: 2 / 3,
+                  child: new Image.asset(
+                    'assets/images/1.jpg',
+                    scale: 1.0,
+                  ),
+                ),
+                transform: Matrix4.translationValues(
+                    random
+                            .nextInt(
+                                (MediaQuery.of(context).size.width).toInt())
+                            .toDouble() *
+                        0.5,
+                    random
+                            .nextInt(
+                                (MediaQuery.of(context).size.height).toInt())
+                            .toDouble() *
+                        0.5,
+                    0.0),
+              ),
+            ),
+            new AnimatedOpacity(
+              duration: Duration(seconds: 3),
+              opacity: opacity,
+              child: new Container(
+                child: AspectRatio(
+                  aspectRatio: 2 / 3,
+                  child: new Image.asset(
+                    'assets/images/2.jpg',
+                    scale: 1.0,
+                  ),
+                ),
+                transform: Matrix4.translationValues(
+                    random
+                            .nextInt(
+                                (MediaQuery.of(context).size.width).toInt())
+                            .toDouble() *
+                        0.4,
+                    random
+                            .nextInt(
+                                (MediaQuery.of(context).size.height).toInt())
+                            .toDouble() *
+                        0.4,
+                    0.0),
+              ),
+            ),
+            new AnimatedOpacity(
+              duration: Duration(seconds: 3),
+              opacity: opacity,
+              child: new Container(
+                child: AspectRatio(
+                  aspectRatio: 2 / 3,
+                  child: new Image.asset(
+                    'assets/images/3.jpg',
+                    scale: 1.0,
+                  ),
+                ),
+                transform: Matrix4.translationValues(
+                    random
+                            .nextInt(
+                                (MediaQuery.of(context).size.width).toInt())
+                            .toDouble() *
+                        0.7,
+                    random
+                            .nextInt(
+                                (MediaQuery.of(context).size.height).toInt())
+                            .toDouble() *
+                        0.8,
+                    0.0),
+              ),
+            ),
+            new AnimatedOpacity(
+              duration: Duration(seconds: 3),
+              opacity: opacity,
+              child: new Container(
+                child: AspectRatio(
+                  aspectRatio: 2 / 3,
+                  child: new Image.asset(
+                    'assets/images/3.jpg',
+                    scale: 1.0,
+                  ),
+                ),
+                transform: Matrix4.translationValues(
+                    random
+                            .nextInt(
+                                (MediaQuery.of(context).size.width).toInt())
+                            .toDouble() *
+                        0.2,
+                    random
+                            .nextInt(
+                                (MediaQuery.of(context).size.height).toInt())
+                            .toDouble() *
+                        0.6,
+                    0.0),
+              ),
             ),
             new Center(
               child: new ClipRect(
